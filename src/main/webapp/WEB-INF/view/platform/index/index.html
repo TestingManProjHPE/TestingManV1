@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<!-- Template Name: hpe -->
+<!--[if IE 8]><html class="ie8" lang="zh-CN"><![endif]-->
+<!--[if IE 9]><html class="ie9" lang="zh-CN"><![endif]-->
+<!--[if !IE]><!-->
+<html lang="zh-CN">
+<!--<![endif]-->
+
+<!-- start: HEAD -->
+<head>
+	<title>测试质量管理平台</title>
+	<% include("/platform/index/head.html"){} %>
+	
+	<% include("/platform/index/i18n.html"){} %>
+</head>
+<!-- end: HEAD -->
+
+<!-- start: BODY -->
+<body>
+	
+	<div class="wrapper">
+		<!-- start: TOPBAR -->
+		<% include("/platform/index/header.html"){} %>
+		<!-- end: TOPBAR -->
+		
+		<!-- start: PAGESLIDE LEFT -->
+		<% include("/platform/index/pageslide-left.html"){} %>
+		<!-- end: PAGESLIDE LEFT -->
+		
+		<!-- start: MAIN CONTAINER -->
+		<section>
+		<div class="content-wrapper">
+		
+			<!-- start: PAGE -->
+			<div class="main-content">
+				<!-- start: PANEL CONFIGURATION MODAL FORM -->
+				<div class="modal fade" id="panel-config" tabindex="-1" role="dialog" aria-hidden="true">
+					<div class="modal-dialog">
+						<div class="modal-content">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+									&times;
+								</button>
+								<h4 class="modal-title">Panel Configuration</h4>
+							</div>
+							<div class="modal-body">
+								Here will be a configuration form
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-default" data-dismiss="modal">
+									Close
+								</button>
+								<button type="button" class="btn btn-primary">
+									Save changes
+								</button>
+							</div>
+						</div>
+						<!-- /.modal-content -->
+					</div>
+					<!-- /.modal-dialog -->
+				</div>
+				<!-- /.modal -->
+				<!-- end: SPANEL CONFIGURATION MODAL FORM -->
+				
+				<div id="ajax-modal" class="modal extended-modal fade no-display" tabindex="-1"></div>
+				
+				<div class="container">
+					<!-- start: PAGE HEADER -->
+					<!-- start: TOOLBAR -->
+					<% include("/platform/index/toolbar.html"){} %>
+					<!-- end: TOOLBAR -->
+					<!-- end: PAGE HEADER -->
+					
+					<!-- start: BREADCRUMB -->
+					<!-- end: BREADCRUMB -->
+					
+					<!-- start: PAGE CONTENT -->
+					<!-- end: PAGE CONTENT-->
+				</div>
+				
+				<div class="subviews">
+					<div class="subviews-container"></div>
+				</div>
+			</div>
+			<!-- end: PAGE -->
+		</div>
+		</section>
+		<!-- end: MAIN CONTAINER -->
+		
+		<!-- start: FOOTER -->
+		<% include("/platform/index/footer.html"){} %>
+		<!-- end: FOOTER -->
+		
+	</div>
+	
+	<% include("/platform/index/js.html"){} %>
+	
+	<script type="text/javascript">
+		
+		jQuery(document).ready(function() {
+			Main.init();
+			common_modals.init();
+			common_ajax.ajaxMainPanel("/jf/platform/index/content");
+		});
+		
+	</script>
+</body>
+<!-- end: BODY -->
+	
+</html>

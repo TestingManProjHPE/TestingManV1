@@ -1,0 +1,71 @@
+		<a class="closedbar inner hidden-sm hidden-xs" href="#"></a>
+			<nav id="pageslide-left" class="pageslide inner">
+				<div class="navbar-content">
+					
+					<!-- start: SIDEBAR -->
+					<div class="main-navigation left-wrapper transition-left">
+						
+						<div class="navigation-toggler hidden-sm hidden-xs">
+							<a href="#main-navbar" class="sb-toggle-left">
+							</a>
+						</div>
+						
+						<!-- start: MAIN NAVIGATION MENU -->
+						<ul class="main-navigation-menu">
+							<li class="active open">
+								<a href="#" onclick='common_ajax.ajaxMainPanel("/jf/platform/index/content");'>
+									<i class="fa fa-home"></i> 
+									<span class="title"> 涓婚〉 </span>
+									<span class="label label-default pull-right ">LABEL</span> 
+								</a>
+							</li>
+							
+							<% for(one in menuList){ %>
+								
+								<% if(isEmpty(one.subList) == false){ %>
+									<li>
+										<a href="javascript:;">
+											<i class="fa fa-folder-open"></i> <span class="title"> ${one.names } </span><i class="icon-arrow"></i> <span class="arrow "></span>
+										</a>
+										<ul class="nav sidebar-subnav collapse">
+											<% for(two in one.subList){ %>
+												<li title="${two.names!}">
+													<% if(strutil.contain(two.url, ".html") == false){ %>
+														<li>
+															<a href="#" onclick='common_ajax.ajaxMainPanel("${two.url!}");'>
+																${two.names} <i class="icon-arrow"></i>
+															</a>
+														</li>
+													<% }else{ %>
+														<li>
+															<a href="#" onclick='common_ajax.ajaxMainPanel("/jf/platform/index/toUrl?toUrl=${two.url!}");'>
+																${two.names} <i class="icon-arrow"></i>
+															</a>
+														</li>
+													<% } %>
+												</li>
+											<% } %>
+										</ul>
+									</li>
+								<% } %>
+								
+							<% } %>
+							
+						</ul>
+						<!-- end: MAIN NAVIGATION MENU -->
+					</div>
+					<!-- end: SIDEBAR -->
+				</div>
+				<div class="slide-tools">
+					<div class="col-xs-6 text-left no-padding">
+						<a class="btn btn-sm status" href="#">
+							鐘舵�� <i class="fa fa-dot-circle-o text-green"></i> <span>鍦ㄧ嚎</span>
+						</a>
+					</div>
+					<div class="col-xs-6 text-right no-padding">
+						<a class="btn btn-sm log-out text-right" href="${cxt!}/jf/platform/login/logout">
+							<i class="fa fa-power-off"></i> ${i18nMap["admin.top.exitSystem"]}
+						</a>
+					</div>
+				</div>
+			</nav>

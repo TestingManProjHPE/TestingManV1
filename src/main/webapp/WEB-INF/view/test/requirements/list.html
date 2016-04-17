@@ -1,0 +1,187 @@
+
+<div class="row">
+	<div class="col-md-12">
+		<ol class="breadcrumb">
+			<li><a href="#" onclick="common_ajax.ajaxMainPanel('/jf/test/index/content');">${i18nMap["admin.common.mainPage"]}</a></li>
+			<li class="active">需求管理</li>
+		</ol>
+	</div>
+</div>
+						
+<form id="splitPage" class="form-horizontal" action="${cxt!}/jf/test/requirements" method="POST">
+	
+	<div class="row">
+		<div class="col-md-12">
+			<!-- start: BORDERED TABLE PANEL -->
+			<div class="panel panel-white">
+				
+				<div class="panel-heading">
+					<h4 class="panel-title"><span class="text-bold">需求</span></h4>
+					<div class="panel-tools">										
+						<% include("/common/panel-tools.html"){} %>
+					</div>
+				</div>
+				
+				<div class="panel-body">		
+				  	<div class="form-group">
+				  	
+						<label class="col-sm-2 control-label" for="focusedInput">创建时间</label>
+						<div class="col-sm-4">
+						 	<input class="form-control focused" type="text" 
+						 	name="_query.creation_date" value='${escapeXml(paramMap["_query.creation_date"])}' 
+						 	maxlength="50" >
+						</div>
+								
+						<label class="col-sm-2 control-label" for="focusedInput">用户</label>
+						<div class="col-sm-4">
+						 	<input class="form-control focused" type="text" 
+						 	name="_query.author" value='${escapeXml(paramMap["_query.author"])}' 
+						 	maxlength="50" >
+						</div>
+
+				  	</div>
+				  	
+					<div class="form-group">
+						<div class="col-sm-5 col-sm-offset-5">
+							<button type="button" class="btn btn-primary" onclick='common_ajax.ajaxFormMainPanel("splitPage");'>${i18nMap["admin.common.select"]}</button>
+							<button type="reset" class="btn">${i18nMap["admin.common.reset"]}</button>
+						</div>
+				  	</div>
+				</div>
+			
+			</div>
+		</div>
+	</div>
+	
+	<div class="row">
+		<div class="col-md-12">
+			<!-- start: BORDERED TABLE PANEL -->
+			<div class="panel panel-white">
+				
+				<div class="panel-heading">
+					<h4 class="panel-title">
+						<span class="text-bold">需求列表</span>
+					</h4>
+					<div class="panel-tools">										
+						<% include("/common/panel-tools.html"){} %>
+					</div>
+				</div>
+				
+				<%
+					var edit = authUrl("/jf/test/requirements/edit");
+					var delete = authUrl("/jf/test/requirements/delete");
+					var view = authUrl("/jf/test/requirements/view");
+				%>
+				
+				<div class="panel-body">
+					
+					<div class="row">
+						<div class="col-md-12 space20">
+						
+							<% if(authUrl("/test/requirements/add.html")){ %>
+								<button type="button" class="btn btn-success add-row" 
+									onclick="common_ajax.ajaxMainPanel('/jf/test/requirements/toUrl?toUrl=/test/requirements/add.html');">
+									添加需求 <i class="fa fa-plus"></i>
+								</button>
+							<% } %>	
+							
+							<% if(delete == true){ %>
+								<button type="button" class="btn btn-red delete-row" 
+									data-bb="deleteList" data-url="/jf/test/requirements/delete"> 
+									${i18nMap["admin.common.delete"]} <i class="fa fa-trash-o"></i>
+								</button>
+							<% } %>
+
+						</div>
+					</div>
+					
+					<table class="table table-bordered table-hover" id="dataTable">
+						<thead>
+							<tr>
+							
+								<th class="center hidden-xs" width="50">
+									<input type="checkbox" name="checkAll" class="flat-grey selectall" 
+										onchange="common_common.checkFunc('dataTable', this.checked);"> 
+								</th>
+								<th class="hidden-xs" onclick="common_splitPage.orderbyFun(
+										'mainPanel', 'splitPage', 'author')">
+									用户	${orderBy("author")}
+								</th>
+								<th class="hidden-xs" onclick="common_splitPage.orderbyFun(
+										'mainPanel', 'splitPage', 'creation_date')">
+									创建时间	${orderBy("creation_date")}
+								</th>
+
+								<th class="hidden-xs">
+									${i18nMap["admin.common.operation"]}
+								</th>
+
+							</tr>
+						</thead>
+						<tbody>
+							
+							<% for(requirements in splitPage.list){ %>
+							<tr>
+								<td class="center hidden-xs">
+									<input type="checkbox" name="checkIds" 
+										value="${requirements.req_sn!}" class="flat-grey foocheck">
+								</td>
+								<td>
+									<span class="label label-sm label-success">
+										${escapeXml(requirements["author"]!)}
+									</span>
+								</td>
+								<td>
+									${requirements.creation_date!, dateFormat="yyyy-MM-dd HH:mm:ss.SSS"}
+								</td>
+								<td class="hidden-xs">
+									<% if(view == true){ %>
+									<button type="button" class="btn btn-dark-yellow add-row" 
+										onclick="common_ajax.ajaxMainPanel(
+												'/jf/test/requirements/view/${requirements.req_sn!}');">
+										${i18nMap["admin.common.see"]} <i class="fa fa-eye"></i>
+									</button>
+									<% } %>
+										
+									<% if(edit == true){ %>
+									<button type="button" class="btn btn-green edit-row" 
+										onclick="common_ajax.ajaxMainPanel(
+												'/jf/test/blog/edit/${escapeXml(requirements.req_sn!)}');"> 
+										${i18nMap["admin.common.edit"]} 
+										<i class="fa fa-edit"></i>
+									</button>
+									<% } %>
+									
+									<% if(delete == true){ %>
+									<button type="button" class="btn btn-red delete-row" 
+										data-bb="deleteOne" 
+										data-url="/jf/test/blog/delete/${requirements.req_sn!}"> 
+										${i18nMap["admin.common.delete"]} 
+										<i class="fa fa-trash-o"></i>
+									</button>
+									<% } %>
+								</td>
+							</tr>
+							<% } %>
+							
+						</tbody>
+					</table>
+					
+					<div class="row" id="splitPageDiv">
+						<% include("/common/splitPage.html", {"divId" : "mainPanel", "formId" : "splitPage", "splitPageDiv" : "splitPageDiv"}){} %>
+					</div>
+					
+				</div>
+			
+			</div>
+			<!-- end: BORDERED TABLE PANEL -->
+		</div>
+	</div>
+	
+</form>			
+
+<script type="text/javascript">
+	jQuery(document).ready(function() {
+		common_form.init();
+	});
+</script>

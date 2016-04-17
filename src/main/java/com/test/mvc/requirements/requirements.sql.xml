@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<sql-statement namespace="test.requirements">
+	
+	<!-- 分页查询：from -->
+	<sql id="splitPage">
+		<![CDATA[ 
+			select 
+				*
+        	from 
+        		requirements
+			
+			where 1=1 
+			
+			<% if(!isEmpty(author)){ %>
+					and author like #'%$author$%'#
+			<% } %>	
+			<% if(!isEmpty(creation_date)){ %>
+					and creation_date like #'%$creation_date$%'#
+			<% } %>	
+
+    	]]>
+	</sql>
+	
+</sql-statement>
