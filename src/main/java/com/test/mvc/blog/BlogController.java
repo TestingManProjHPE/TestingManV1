@@ -1,11 +1,12 @@
 package com.test.mvc.blog;
 
-import org.apache.log4j.Logger;
-
 import com.jfinal.aop.Before;
 import com.platform.constant.ConstantInit;
 import com.platform.mvc.base.BaseController;
 import com.platform.tools.ToolDateTime;
+import org.apache.log4j.Logger;
+
+import java.util.List;
 
 /**
  * XXX 管理	
@@ -24,28 +25,31 @@ import com.platform.tools.ToolDateTime;
 public class BlogController extends BaseController {
 
 	@SuppressWarnings("unused")
-	private static Logger log = Logger.getLogger(BlogController.class);
+	private static Logger log = Logger.getLogger(com.test.mvc.blog.BlogController.class);
 	
 	/**
 	 * 列表
 	 */
 	public void index() {
 		paging(ConstantInit.db_dataSource_main, splitPage, Blog.sqlId_splitPage);
+		List<Blog> lob = (List<Blog>) splitPage.getList();
+
 		render("/test/blog/list.html");
 	}
-	
+
 	/**
 	 * 保存
 	 */
-	@Before(BlogValidator.class)
+	@Before(com.test.mvc.blog.BlogValidator.class)
 	public void save() {
 		Blog blog = getModel(Blog.class);
-		blog.set(Blog.column_createtime, 
+		blog.set(Blog.column_createtime,
 				ToolDateTime.getSqlTimestamp(null));
 		blog.save();
-		render("/test/blog/add.html");
+//		render("/test/blog/add.html");
+		redirect("/jf/test/blog");
 	}
-	
+
 	/**
 	 * 准备更新
 	 */
@@ -54,7 +58,7 @@ public class BlogController extends BaseController {
 		setAttr("blog", blog);
 		render("/test/blog/update.html");
 	}
-	
+
 	/**
 	 * 更新
 	 */
@@ -77,7 +81,7 @@ public class BlogController extends BaseController {
 	 * 删除
 	 */
 	public void delete() {
-		BlogService.service.delete("test_blog", 
+		BlogService.service.delete("test_blog",
 				getPara() == null ? ids : getPara());
 		redirect("/jf/test/blog");
 	}

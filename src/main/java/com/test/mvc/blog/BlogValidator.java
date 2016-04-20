@@ -1,14 +1,13 @@
 package com.test.mvc.blog;
 
-import org.apache.log4j.Logger;
-
 import com.jfinal.core.Controller;
 import com.jfinal.validate.Validator;
+import org.apache.log4j.Logger;
 
 public class BlogValidator extends Validator {
 
 	@SuppressWarnings("unused")
-	private static Logger log = Logger.getLogger(BlogValidator.class);
+	private static Logger log = Logger.getLogger(com.test.mvc.blog.BlogValidator.class);
 	
 	protected void validate(Controller controller) {
 		String actionKey = getActionKey();

@@ -241,9 +241,14 @@
 				.appendTo(this.$element);
 
 			if (modal && modal.options.backdrop != 'static') {
-				$container.on('click.modal', targetIsSelf(function (e) {
-					modal.hide();
-				}));
+				//$container.on('click.modal', targetIsSelf(function (e) {
+				//by yxin, the modal.hide() not functional when using targetIsSelf, don't know why?
+				$container.on('click.modal', function(e) {
+					//console.log(e.target.id == 'ajax-modal');
+					if (e.target.id == 'ajax-modal') {
+						modal.hide();
+					}
+					});
 			} else if (modal) {
 				$container.on('click.modal', targetIsSelf(function (e) {
 					modal.attention();

@@ -16,49 +16,6 @@
 			<div class="panel panel-white">
 				
 				<div class="panel-heading">
-					<h4 class="panel-title"><span class="text-bold">需求</span></h4>
-					<div class="panel-tools">										
-						<% include("/common/panel-tools.html"){} %>
-					</div>
-				</div>
-				
-				<div class="panel-body">		
-				  	<div class="form-group">
-				  	
-						<label class="col-sm-2 control-label" for="focusedInput">创建时间</label>
-						<div class="col-sm-4">
-						 	<input class="form-control focused" type="text" 
-						 	name="_query.creation_date" value='${escapeXml(paramMap["_query.creation_date"])}' 
-						 	maxlength="50" >
-						</div>
-								
-						<label class="col-sm-2 control-label" for="focusedInput">用户</label>
-						<div class="col-sm-4">
-						 	<input class="form-control focused" type="text" 
-						 	name="_query.author" value='${escapeXml(paramMap["_query.author"])}' 
-						 	maxlength="50" >
-						</div>
-
-				  	</div>
-				  	
-					<div class="form-group">
-						<div class="col-sm-5 col-sm-offset-5">
-							<button type="button" class="btn btn-primary" onclick='common_ajax.ajaxFormMainPanel("splitPage");'>${i18nMap["admin.common.select"]}</button>
-							<button type="reset" class="btn">${i18nMap["admin.common.reset"]}</button>
-						</div>
-				  	</div>
-				</div>
-			
-			</div>
-		</div>
-	</div>
-	
-	<div class="row">
-		<div class="col-md-12">
-			<!-- start: BORDERED TABLE PANEL -->
-			<div class="panel panel-white">
-				
-				<div class="panel-heading">
 					<h4 class="panel-title">
 						<span class="text-bold">需求列表</span>
 					</h4>
@@ -77,13 +34,11 @@
 					
 					<div class="row">
 						<div class="col-md-12 space20">
-						
 							<% if(authUrl("/test/requirements/add.html")){ %>
-								<button type="button" class="btn btn-success add-row" 
-									onclick="common_ajax.ajaxMainPanel('/jf/test/requirements/toUrl?toUrl=/test/requirements/add.html');">
-									添加需求 <i class="fa fa-plus"></i>
-								</button>
-							<% } %>	
+							<a href="#" data-toggle="modal" class="ajaxDialog btn btn-purple add-row"
+							   data-url="/jf/test/blog/toUrl?toUrl=/test/requirements/add.html" data-backdrop="true">添加<i class="fa fa-plus"></i>
+							</a>
+							<% } %>
 							
 							<% if(delete == true){ %>
 								<button type="button" class="btn btn-red delete-row" 
@@ -94,8 +49,10 @@
 
 						</div>
 					</div>
-					
-					<table class="table table-bordered table-hover" id="dataTable">
+					<div class="row" id="splitPageDivHead">
+						<% include("/common/splitPageHead.html", {"divId" : "mainPanel", "formId" : "splitPage", "splitPageDiv" : "splitPageDiv"}){} %>
+					</div>
+					<table class="table table-striped" id="dataTable">
 						<thead>
 							<tr>
 							
@@ -127,9 +84,9 @@
 										value="${requirements.req_sn!}" class="flat-grey foocheck">
 								</td>
 								<td>
-									<span class="label label-sm label-success">
+									<!--<span class="label label-sm label-success">-->
 										${escapeXml(requirements["author"]!)}
-									</span>
+									<!--</span>-->
 								</td>
 								<td>
 									${requirements.creation_date!, dateFormat="yyyy-MM-dd HH:mm:ss.SSS"}
@@ -165,6 +122,19 @@
 							<% } %>
 							
 						</tbody>
+						<tfood>
+							<tr><th rowspan="1" colspan="1">
+								<input type="text" name="filter_rendering_engine" placeholder=" " class="form-control input-sm datatable_input_col_search" readonly>
+							</th><th rowspan="1" colspan="1">
+								<input type="text" name="_query.author" value='${escapeXml(paramMap["_query.author"])}'
+									   maxlength="50" placeholder="用户" class="form-control focused input-sm datatable_input_col_search" onblur='common_ajax.ajaxFormMainPanel("splitPage");'>
+							</th><th rowspan="1" colspan="1">
+								<input type="text" name="filter_platform" placeholder="创建时间" class="form-control input-sm datatable_input_col_search" readonly>
+							</th><th rowspan="1" colspan="1">
+								<input type="text" name="filter_engine_version" placeholder="操作" class="form-control input-sm datatable_input_col_search" readonly>
+							</th>
+							</tr>
+						</tfood>
 					</table>
 					
 					<div class="row" id="splitPageDiv">
@@ -185,3 +155,4 @@
 		common_form.init();
 	});
 </script>
+

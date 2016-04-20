@@ -1,10 +1,10 @@
 package com.test.mvc.blog;
 
-import java.sql.Timestamp;
-
+import com.platform.mvc.base.BaseModel;
 import org.apache.log4j.Logger;
 
-import com.platform.mvc.base.BaseModel;
+import java.sql.Timestamp;
+import java.util.List;
 
 /**
  * 博客表 model
@@ -43,8 +43,12 @@ public class Blog extends BaseModel<Blog> {
 	 * 字段类型：timestamp with time zone  长度：null
 	 */
 	public static final String column_createtime = "createtime";
-	
-	
+
+	//test adding column
+	public static final String column_summary = "summary";
+	public static final String column_assignedto = "assignedto";
+	public static final String column_detecteddate = "detecteddate";
+
 	/**
 	 * sqlId : test.testBlog.splitPage
 	 * 描述：分页from
@@ -74,6 +78,32 @@ public class Blog extends BaseModel<Blog> {
 	}
 	public Timestamp getCreatetime() {
 		return get(column_createtime);
+	}
+
+	public void setSummary(String summary){
+		set(column_summary, summary);
+	}
+	public String getSummary() {
+		return get(column_summary);
+	}
+	public void setAssignedTo(String assignedto){
+		set(column_assignedto, assignedto);
+	}
+	public String getAssignedTo() {
+		return get(column_assignedto);
+	}
+	public void setDetectedDate(Timestamp detecteddate){
+		set(column_detecteddate, detecteddate);
+	}
+	public Timestamp getDetectedDate() {
+		return get(column_detecteddate);
+	}
+
+	public List<Blog> findAll() {
+		return find("select * from test_blog");
+	}
+	public void deleteByIds(String ids) {
+		find("delete from test_blog t where t.ids = "+ids);
 	}
 	
 }

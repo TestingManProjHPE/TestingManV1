@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="JfinalUIB-V2-FOR-MAVEN:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <root id="archive" name="JfinalUIB_V2_FOR_MAVEN.war">
+      <element id="artifact" artifact-name="JfinalUIB-V2-FOR-MAVEN:war exploded" />
+    </root>
+  </artifact>
+</component>

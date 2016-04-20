@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: little.ant.jcseg.analyzer:jcseg-analyzer:1.9.6">
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/little/ant/jcseg/analyzer/jcseg-analyzer/1.9.6/jcseg-analyzer-1.9.6.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$MAVEN_REPOSITORY$/little/ant/jcseg/analyzer/jcseg-analyzer/1.9.6/jcseg-analyzer-1.9.6-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$MAVEN_REPOSITORY$/little/ant/jcseg/analyzer/jcseg-analyzer/1.9.6/jcseg-analyzer-1.9.6-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
